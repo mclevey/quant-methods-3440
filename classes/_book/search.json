@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SOCI 3440",
+    "section": "",
+    "text": "Course Information"
+  },
+  {
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "SOCI 3440",
+    "section": "Description",
+    "text": "Description"
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "SOCI 3440",
+    "section": "Schedule",
+    "text": "Schedule"
+  },
+  {
+    "objectID": "writing-research.html#directed-acyclic-graphs-dags",
+    "href": "writing-research.html#directed-acyclic-graphs-dags",
+    "title": "3  Writing Research",
+    "section": "3.1 Directed Acyclic Graphs (DAGs)",
+    "text": "3.1 Directed Acyclic Graphs (DAGs)\n\n\n\n\n\n\n\n\nD\n\n  \n\nx\n\nx   \n\ny\n\ny   \n\nx-&gt;y\n\n   \n\n\nFigure 3.1: We expect a causal relationship between x and y, where x influences y\n\n\n\n\n\n\n\n\n\n\n\n\nD\n\n  \n\na\n\nIncome   \n\nb\n\nHappiness   \n\na-&gt;b\n\n    \n\nc\n\nEducation   \n\nc-&gt;a\n\n    \n\nc-&gt;b\n\n   \n\n\nFigure 3.2: Education is a confounder that affects the relationship between income and happiness\n\n\n\n\n\n\n\n\n\n\n\n\nD\n\n  \n\na\n\nIncome   \n\nb\n\nHappiness   \n\na-&gt;b\n\n    \n\nc\n\nChildren   \n\na-&gt;c\n\n    \n\nc-&gt;b\n\n   \n\n\nFigure 3.3: blah blah blah\n\n\n\n\n\n\n\n\n\n\n\n\nD\n\n  \n\na\n\nIncome   \n\nb\n\nHappiness   \n\na-&gt;b\n\n    \n\nc\n\nExercise   \n\na-&gt;c\n\n    \n\nb-&gt;c\n\n   \n\n\nFigure 3.4: blah blah blah"
+  },
+  {
+    "objectID": "static-communication.html",
+    "href": "static-communication.html",
+    "title": "4  Static Communication",
+    "section": "",
+    "text": "import pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport statsmodels.api as sm\nimport geopandas as gpd\nimport folium"
+  }
+]

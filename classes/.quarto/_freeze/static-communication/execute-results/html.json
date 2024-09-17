@@ -1,0 +1,11 @@
+{
+  "hash": "61477290c00491ba428c9f573a0d4d6a",
+  "result": {
+    "markdown": "# Static Communication\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport statsmodels.api as sm\nimport geopandas as gpd\nimport folium\n```\n:::\n\n\n",
+    "supporting": [
+      "static-communication_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

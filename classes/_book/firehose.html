@@ -1,0 +1,2448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>SOCI 3440 - 2&nbsp; Drinking from the Firehose</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./telling-stories.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./firehose.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Drinking from the Firehose</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">SOCI 3440</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Information</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./telling-stories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Telling Stories with Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./firehose.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Drinking from the Firehose</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#examples-in-python" id="toc-examples-in-python" class="nav-link active" data-scroll-target="#examples-in-python"><span class="header-section-number">2.1</span> Examples in Python</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2.2</span> Setup</a></li>
+  <li><a href="#australian-elections" id="toc-australian-elections" class="nav-link" data-scroll-target="#australian-elections"><span class="header-section-number">2.3</span> Australian Elections</a>
+  <ul class="collapse">
+  <li><a href="#simulate" id="toc-simulate" class="nav-link" data-scroll-target="#simulate"><span class="header-section-number">2.3.1</span> Simulate</a></li>
+  <li><a href="#acquire" id="toc-acquire" class="nav-link" data-scroll-target="#acquire"><span class="header-section-number">2.3.2</span> Acquire</a></li>
+  <li><a href="#explore" id="toc-explore" class="nav-link" data-scroll-target="#explore"><span class="header-section-number">2.3.3</span> Explore</a></li>
+  <li><a href="#share" id="toc-share" class="nav-link" data-scroll-target="#share"><span class="header-section-number">2.3.4</span> Share</a></li>
+  </ul></li>
+  <li><a href="#torontos-unhoused-population" id="toc-torontos-unhoused-population" class="nav-link" data-scroll-target="#torontos-unhoused-population"><span class="header-section-number">2.4</span> Toronto’s unhoused population</a>
+  <ul class="collapse">
+  <li><a href="#simulate-1" id="toc-simulate-1" class="nav-link" data-scroll-target="#simulate-1"><span class="header-section-number">2.4.1</span> Simulate</a></li>
+  <li><a href="#acquire-1" id="toc-acquire-1" class="nav-link" data-scroll-target="#acquire-1"><span class="header-section-number">2.4.2</span> Acquire</a></li>
+  <li><a href="#explore-1" id="toc-explore-1" class="nav-link" data-scroll-target="#explore-1"><span class="header-section-number">2.4.3</span> Explore</a></li>
+  </ul></li>
+  <li><a href="#neonatal-mortality" id="toc-neonatal-mortality" class="nav-link" data-scroll-target="#neonatal-mortality"><span class="header-section-number">2.5</span> Neonatal Mortality</a>
+  <ul class="collapse">
+  <li><a href="#simulate-2" id="toc-simulate-2" class="nav-link" data-scroll-target="#simulate-2"><span class="header-section-number">2.5.1</span> Simulate</a></li>
+  <li><a href="#acquire-2" id="toc-acquire-2" class="nav-link" data-scroll-target="#acquire-2"><span class="header-section-number">2.5.2</span> Acquire</a></li>
+  <li><a href="#explore-2" id="toc-explore-2" class="nav-link" data-scroll-target="#explore-2"><span class="header-section-number">2.5.3</span> Explore</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Drinking from the Firehose</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<blockquote class="blockquote">
+<p>This notebook translates the R code in <a href="https://tellingstorieswithdata.com/02-drinking_from_a_fire_hose.html">Chapter 2: Drinking from the Firehose</a> to Python.</p>
+</blockquote>
+<section id="examples-in-python" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="examples-in-python"><span class="header-section-number">2.1</span> Examples in Python</h2>
+</section>
+<section id="setup" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2.2</span> Setup</h2>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> janitor <span class="im">import</span> clean_names, remove_empty</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timedelta</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> TorontoOpenData <span class="im">import</span> TorontoOpenData</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qrm3440 <span class="im">import</span> set_style</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>set_style()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/root/.cache/pypoetry/virtualenvs/qrm3440-djWU9zOu-py3.12/lib/python3.12/site-packages/ckanapi/version.py:1: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  import pkg_resources</code></pre>
+</div>
+</div>
+</section>
+<section id="australian-elections" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="australian-elections"><span class="header-section-number">2.3</span> Australian Elections</h2>
+<section id="simulate" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="simulate"><span class="header-section-number">2.3.1</span> Simulate</h3>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">853</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>simulated_election_data <span class="op">=</span> {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Division"</span>: <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">152</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Party"</span>: np.random.choice(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        [<span class="st">"Liberal"</span>, <span class="st">"Labour"</span>, <span class="st">"National"</span>, <span class="st">"Green"</span>, <span class="st">"Other"</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        size <span class="op">=</span> <span class="dv">151</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        replace <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>simulated_election_data <span class="op">=</span> pd.DataFrame(simulated_election_data)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>simulated_election_data.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Division</th>
+<th data-quarto-table-cell-role="th">Party</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>119</td>
+<td>Other</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">121</td>
+<td>122</td>
+<td>National</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">104</td>
+<td>105</td>
+<td>Liberal</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">132</td>
+<td>133</td>
+<td>National</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">136</td>
+<td>137</td>
+<td>Other</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>24</td>
+<td>Other</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">107</td>
+<td>108</td>
+<td>National</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">56</td>
+<td>57</td>
+<td>Liberal</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">101</td>
+<td>102</td>
+<td>Green</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">93</td>
+<td>94</td>
+<td>Liberal</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="acquire" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="acquire"><span class="header-section-number">2.3.2</span> Acquire</h3>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_url <span class="op">=</span> <span class="st">"https://results.aec.gov.au/27966/website/Downloads/HouseMembersElectedDownload-27966.csv"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>raw_elections_data <span class="op">=</span> pd.read_csv(data_url, skiprows<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>raw_elections_data.to_csv(<span class="st">"data/australian_voting.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>raw_elections_data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 151 entries, 0 to 150
+Data columns (total 8 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   DivisionID   151 non-null    int64 
+ 1   DivisionNm   151 non-null    object
+ 2   StateAb      151 non-null    object
+ 3   CandidateID  151 non-null    int64 
+ 4   GivenNm      151 non-null    object
+ 5   Surname      151 non-null    object
+ 6   PartyNm      151 non-null    object
+ 7   PartyAb      151 non-null    object
+dtypes: int64(2), object(6)
+memory usage: 9.6+ KB</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>raw_elections_data.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">DivisionID</th>
+<th data-quarto-table-cell-role="th">DivisionNm</th>
+<th data-quarto-table-cell-role="th">StateAb</th>
+<th data-quarto-table-cell-role="th">CandidateID</th>
+<th data-quarto-table-cell-role="th">GivenNm</th>
+<th data-quarto-table-cell-role="th">Surname</th>
+<th data-quarto-table-cell-role="th">PartyNm</th>
+<th data-quarto-table-cell-role="th">PartyAb</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41</td>
+<td>252</td>
+<td>Dickson</td>
+<td>QLD</td>
+<td>37493</td>
+<td>Peter</td>
+<td>DUTTON</td>
+<td>Liberal National Party of Queensland</td>
+<td>LNP</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31</td>
+<td>112</td>
+<td>Cook</td>
+<td>NSW</td>
+<td>37025</td>
+<td>Scott</td>
+<td>MORRISON</td>
+<td>Liberal</td>
+<td>LP</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">45</td>
+<td>117</td>
+<td>Eden-Monaro</td>
+<td>NSW</td>
+<td>36803</td>
+<td>Kristy</td>
+<td>McBAIN</td>
+<td>Australian Labor Party</td>
+<td>ALP</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">71</td>
+<td>165</td>
+<td>Herbert</td>
+<td>QLD</td>
+<td>37471</td>
+<td>Phillip</td>
+<td>THOMPSON</td>
+<td>Liberal National Party of Queensland</td>
+<td>LNP</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">131</td>
+<td>250</td>
+<td>Riverina</td>
+<td>NSW</td>
+<td>36324</td>
+<td>Michael</td>
+<td>McCORMACK</td>
+<td>The Nationals</td>
+<td>NP</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50</td>
+<td>161</td>
+<td>Fisher</td>
+<td>QLD</td>
+<td>37504</td>
+<td>Andrew</td>
+<td>WALLACE</td>
+<td>Liberal National Party of Queensland</td>
+<td>LNP</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">39</td>
+<td>158</td>
+<td>Dawson</td>
+<td>QLD</td>
+<td>37485</td>
+<td>Andrew</td>
+<td>WILLCOX</td>
+<td>Liberal National Party of Queensland</td>
+<td>LNP</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">106</td>
+<td>315</td>
+<td>McMahon</td>
+<td>NSW</td>
+<td>36815</td>
+<td>Chris</td>
+<td>BOWEN</td>
+<td>Australian Labor Party</td>
+<td>ALP</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">133</td>
+<td>177</td>
+<td>Ryan</td>
+<td>QLD</td>
+<td>37370</td>
+<td>Elizabeth</td>
+<td>WATSON-BROWN</td>
+<td>The Greens</td>
+<td>GRN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">81</td>
+<td>219</td>
+<td>Isaacs</td>
+<td>VIC</td>
+<td>36434</td>
+<td>Mark</td>
+<td>DREYFUS</td>
+<td>Australian Labor Party</td>
+<td>ALP</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We can do a bit of cleaning using <code>janitor</code>.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data <span class="op">=</span> clean_names(raw_elections_data)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_elections_data.head(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   divisionid divisionnm stateab  candidateid           givennm    surname  \
+0         179   Adelaide      SA        36973             Steve  GEORGANAS   
+1         197      Aston     VIC        36704              Alan      TUDGE   
+2         198   Ballarat     VIC        36409         Catherine       KING   
+3         103      Banks     NSW        37018             David    COLEMAN   
+4         180     Barker      SA        37083              Tony      PASIN   
+5         104     Barton     NSW        36820             Linda     BURNEY   
+6         192       Bass     TAS        37134  Bridget Kathleen     ARCHER   
+7         318       Bean     ACT        36231             David      SMITH   
+8         200    Bendigo     VIC        36424              Lisa   CHESTERS   
+9         105  Bennelong     NSW        36827            Jerome     LAXALE   
+
+                  partynm partyab  
+0  Australian Labor Party     ALP  
+1                 Liberal      LP  
+2  Australian Labor Party     ALP  
+3                 Liberal      LP  
+4                 Liberal      LP  
+5  Australian Labor Party     ALP  
+6                 Liberal      LP  
+7  Australian Labor Party     ALP  
+8  Australian Labor Party     ALP  
+9  Australian Labor Party     ALP  </code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data <span class="op">=</span> cleaned_elections_data[[<span class="st">"divisionnm"</span>, <span class="st">"partynm"</span>]]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">divisionnm</th>
+<th data-quarto-table-cell-role="th">partynm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Adelaide</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Ballarat</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50</td>
+<td>Fisher</td>
+<td>Liberal National Party of Queensland</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">142</td>
+<td>Wannon</td>
+<td>Liberal</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">49</td>
+<td>Fenner</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">92</td>
+<td>Lingiari</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">65</td>
+<td>Greenway</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>Bennelong</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">69</td>
+<td>Hasluck</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">119</td>
+<td>O'Connor</td>
+<td>Liberal</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_elections_data.columns)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data <span class="op">=</span> cleaned_elections_data.rename(columns<span class="op">=</span>{</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"divisionnm"</span>: <span class="st">"division"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"partynm"</span>: <span class="st">"elected_party"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Index(['divisionnm', 'partynm'], dtype='object')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">division</th>
+<th data-quarto-table-cell-role="th">elected_party</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32</td>
+<td>Cooper</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">16</td>
+<td>Braddon</td>
+<td>Liberal</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">129</td>
+<td>Reid</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">128</td>
+<td>Rankin</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33</td>
+<td>Corangamite</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>Blair</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">57</td>
+<td>Fraser</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">45</td>
+<td>Eden-Monaro</td>
+<td>Australian Labor Party</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">109</td>
+<td>Menzies</td>
+<td>Liberal</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>Burt</td>
+<td>Australian Labor Party</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data[<span class="st">"elected_party"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>array(['Australian Labor Party', 'Liberal',
+       'Liberal National Party of Queensland', 'The Greens',
+       'The Nationals', 'Independent', "Katter's Australian Party (KAP)",
+       'Centre Alliance'], dtype=object)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>party_map <span class="op">=</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Australian Labor Party"</span>: <span class="st">"Labor"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liberal National Party of Queensland"</span>: <span class="st">"Liberal"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liberal"</span>: <span class="st">"Liberal"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The Nationals"</span>: <span class="st">"Nationals"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The Greens"</span>: <span class="st">"Greens"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent"</span>: <span class="st">"Other"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Katter's Australian Party (KAP)"</span>: <span class="st">"Other"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Centre Alliance"</span>: <span class="st">"Other"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data[<span class="st">"elected_party"</span>] <span class="op">=</span> cleaned_elections_data[<span class="st">"elected_party"</span>].<span class="bu">map</span>(party_map)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">division</th>
+<th data-quarto-table-cell-role="th">elected_party</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Adelaide</td>
+<td>Labor</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Aston</td>
+<td>Liberal</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Ballarat</td>
+<td>Labor</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Banks</td>
+<td>Liberal</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Barker</td>
+<td>Liberal</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data.to_csv(<span class="st">"data/cleaned_elections_data.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="explore" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="explore"><span class="header-section-number">2.3.3</span> Explore</h3>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data <span class="op">=</span> pd.read_csv(<span class="st">"data/cleaned_elections_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cleaned_elections_data[<span class="st">"elected_party"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>elected_party
+Labor        77
+Liberal      48
+Other        12
+Nationals    10
+Greens        4
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<p>Let’s create our first plot!</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"elected_party"</span>, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>cleaned_elections_data</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"No. of seats won by political party</span><span class="ch">\n</span><span class="st">in the 2022 Australian Federal Election</span><span class="ch">\n</span><span class="st">"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">""</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of seats</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plt.savefig(</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'figures/australian_election_2022.png'</span>, dpi<span class="op">=</span><span class="dv">300</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/lib/python3.12/site-packages/IPython/core/pylabtools.py:77: DeprecationWarning: backend2gui is deprecated since IPython 8.24, backends are managed in matplotlib and can be externally registered.
+  warnings.warn(
+/usr/lib/python3.12/site-packages/IPython/core/pylabtools.py:77: DeprecationWarning: backend2gui is deprecated since IPython 8.24, backends are managed in matplotlib and can be externally registered.
+  warnings.warn(
+/tmp/ipykernel_4125/2891693074.py:13: UserWarning: The figure layout has changed to tight
+  plt.tight_layout()</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="firehose_files/figure-html/cell-14-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="share" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="share"><span class="header-section-number">2.3.4</span> Share</h3>
+<blockquote class="blockquote">
+<p>Australia is a parliamentary democracy with 151 seats in the House of Representatives, which is the house from which government is formed. There are two major parties—“Liberal” and “Labor”—two minor parties—“Nationals” and “Greens”—and many smaller parties. The 2022 Federal Election occurred on 21 May, and around 15 million votes were cast. We were interested in the number of seats that were won by each party. We downloaded the results, on a seat-specific basis, from the Australian Electoral Commission website. We cleaned and tidied the dataset using Python and libraries including pandas, numpy, matplotlib, and seaborn. We then created a graph of the number of seats that each political party won. We found that the Labor Party won 77 seats, followed by the Liberal Party with 48 seats. The minor parties won the following number of seats: the Nationals won 10 seats and the Greens won 4 seats. Finally, there were 10 Independents elected as well as candidates from smaller parties. The distribution of seats is skewed toward the two major parties which could reflect relatively stable preferences on the part of Australian voters, or possibly inertia due to the benefits of already being a major party such a national network or funding. A better understanding of the reasons for this distribution are of interest in future work. While the dataset consists of everyone who voted, it worth noting that in Australia some are systematically excluded from voting, and it is much more difficult for some to vote than others.</p>
+</blockquote>
+</section>
+</section>
+<section id="torontos-unhoused-population" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="torontos-unhoused-population"><span class="header-section-number">2.4</span> Toronto’s unhoused population</h2>
+<section id="simulate-1" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="simulate-1"><span class="header-section-number">2.4.1</span> Simulate</h3>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">853</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="op">=</span> datetime(<span class="dv">2021</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>dates <span class="op">=</span> [start_date <span class="op">+</span> timedelta(days<span class="op">=</span>i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">365</span>)]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>simulated_occupancy_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'date'</span>: dates <span class="op">*</span> <span class="dv">3</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'shelter'</span>: [<span class="st">'Shelter 1'</span>] <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> [<span class="st">'Shelter 2'</span>] <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> [<span class="st">'Shelter 3'</span>] <span class="op">*</span> <span class="dv">365</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'number_occupied'</span>: np.random.poisson(lam<span class="op">=</span><span class="dv">30</span>, size<span class="op">=</span><span class="dv">365</span><span class="op">*</span><span class="dv">3</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>simulated_occupancy_data.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">shelter</th>
+<th data-quarto-table-cell-role="th">number_occupied</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1024</td>
+<td>2021-10-22</td>
+<td>Shelter 3</td>
+<td>31</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">87</td>
+<td>2021-03-29</td>
+<td>Shelter 1</td>
+<td>24</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">335</td>
+<td>2021-12-02</td>
+<td>Shelter 1</td>
+<td>34</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">465</td>
+<td>2021-04-11</td>
+<td>Shelter 2</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">612</td>
+<td>2021-09-05</td>
+<td>Shelter 2</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">137</td>
+<td>2021-05-18</td>
+<td>Shelter 1</td>
+<td>40</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">108</td>
+<td>2021-04-19</td>
+<td>Shelter 1</td>
+<td>21</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">279</td>
+<td>2021-10-07</td>
+<td>Shelter 1</td>
+<td>34</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">286</td>
+<td>2021-10-14</td>
+<td>Shelter 1</td>
+<td>21</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">713</td>
+<td>2021-12-15</td>
+<td>Shelter 2</td>
+<td>36</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="acquire-1" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="acquire-1"><span class="header-section-number">2.4.2</span> Acquire</h3>
+<p>The data is available <a href="https://open.toronto.ca/dataset/daily-shelter-overnight-service-occupancy-capacity/">here</a>.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tod <span class="op">=</span> TorontoOpenData()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>search_results <span class="op">=</span> tod.search_datasets(<span class="st">'daily-shelter-overnight-service-occupancy-capacity-2021'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>search_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">author</th>
+<th data-quarto-table-cell-role="th">author_email</th>
+<th data-quarto-table-cell-role="th">creator_user_id</th>
+<th data-quarto-table-cell-role="th">dataset_category</th>
+<th data-quarto-table-cell-role="th">date_published</th>
+<th data-quarto-table-cell-role="th">excerpt</th>
+<th data-quarto-table-cell-role="th">formats</th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">information_url</th>
+<th data-quarto-table-cell-role="th">is_retired</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">type</th>
+<th data-quarto-table-cell-role="th">version</th>
+<th data-quarto-table-cell-role="th">resources</th>
+<th data-quarto-table-cell-role="th">tags</th>
+<th data-quarto-table-cell-role="th">groups</th>
+<th data-quarto-table-cell-role="th">relationships_as_subject</th>
+<th data-quarto-table-cell-role="th">relationships_as_object</th>
+<th data-quarto-table-cell-role="th">civic_issues</th>
+<th data-quarto-table-cell-role="th">owner_section</th>
+<th data-quarto-table-cell-role="th">owner_unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>tsssdata@toronto.ca</td>
+<td>tsssdata@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Table</td>
+<td>2021-06-28 13:44:56.408963</td>
+<td>Daily occupancy and capacity data for City of ...</td>
+<td>JSON,CSV,XML</td>
+<td>21c83b32-d5a8-4106-a54f-010dbe49f6f2</td>
+<td>https://www.toronto.ca/city-government/data-re...</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'shelter', 'id': '9863812a-8...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>tsssdata@toronto.ca</td>
+<td>tsssdata@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Table</td>
+<td>2019-07-23 17:00:10.298196</td>
+<td>Daily occupancy of the City of Toronto shelters</td>
+<td>CSV,XML,JSON</td>
+<td>8a6eceb2-821b-4961-a29d-758f3087732d</td>
+<td>https://www.toronto.ca/community-people/housin...</td>
+<td>true</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'homeless', 'id': '3af3eb57-...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>tsssdata@toronto.ca</td>
+<td>tsssdata@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Document</td>
+<td>2019-07-23 17:34:37.680334</td>
+<td>The data set contains the location of the shel...</td>
+<td>SHP,XLS</td>
+<td>24b2b6ff-35b9-481d-9eb6-ba2e5e8b4dfb</td>
+<td>http://www.toronto.ca/housing/about-hostel.htm</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'homeless shelter', 'id': '3...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>affordable_housing</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>tsssdata@toronto.ca</td>
+<td>tsssdata@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Document</td>
+<td>2022-09-30 18:43:00.949324</td>
+<td>This dataset includes a summary of responses f...</td>
+<td>XLSX,XLS</td>
+<td>5793a972-40fb-4e07-bc98-57c00590907a</td>
+<td>https://www.toronto.ca/community-people/commun...</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>bikelocker@toronto.ca</td>
+<td>bikelocker@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Map</td>
+<td>2019-07-23 16:34:00.669785</td>
+<td>A geospatial file that shows where all of the ...</td>
+<td>CSV,SHP,JSON,GEOJSON,GPKG</td>
+<td>2c32f356-e0ff-4245-84ba-cc3dd71a5694</td>
+<td>http://www.toronto.ca/cycling</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'bicycle parking', 'id': '8a...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>tsssdata@toronto.ca</td>
+<td>tsssdata@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Table</td>
+<td>2021-11-15 00:00:00</td>
+<td>The report includes monthly data about people ...</td>
+<td>JSON,CSV,XML</td>
+<td>ac77f532-f18b-427c-905c-4ae87ce69c93</td>
+<td>https://www.toronto.ca/city-government/data-re...</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'affordable housing', 'id': ...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>NaN</td>
+<td>SPI (Service Planning and Integrity)</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>opendata@toronto.ca</td>
+<td>opendata@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Document</td>
+<td>2019-07-23 17:59:05.514613</td>
+<td>This dataset is a tabular file that outlines f...</td>
+<td>XLSX,XLS</td>
+<td>1643a780-b01c-4a1d-b6b3-2c0538d111b3</td>
+<td>http://www.toronto.ca/housing/about-hostel.htm</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'housing', 'id': '72f69466-9...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>Affordable housing,Poverty reduction</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Sandro.Tersigni@toronto.ca</td>
+<td>Sandro.Tersigni@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Map</td>
+<td>2019-07-23 18:03:41.634773</td>
+<td>Transit shelter location and asset type data f...</td>
+<td>GPKG,CSV,SHP,GEOJSON</td>
+<td>1db34737-ffad-489d-a590-9171d500d453</td>
+<td>NaN</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'bus shelter', 'id': 'ded095...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>Mobility</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>opendata@toronto.ca</td>
+<td>opendata@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Website</td>
+<td>2019-07-23 17:00:02.089385</td>
+<td>Number of client visits to Daily Bread Food Ba...</td>
+<td>XLS,WEB</td>
+<td>2d48a61d-da9b-4cfb-9dac-19f65492f756</td>
+<td>http://www.toronto.ca/progressportal</td>
+<td>true</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'daily bread food bank', 'id...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>animalservices@toronto.ca</td>
+<td>animalservices@toronto.ca</td>
+<td>329e1506-b545-4fc7-a4ea-e614f220eea7</td>
+<td>Document</td>
+<td>2020-10-02 16:35:28.527043</td>
+<td>The data includes requests for service regardi...</td>
+<td>XLS</td>
+<td>694b6a00-7850-4d2b-a2f4-0d6ab93f8883</td>
+<td>http://www.toronto.ca/animalservices</td>
+<td>false</td>
+<td>...</td>
+<td>dataset</td>
+<td>None</td>
+<td>[{'cache_last_updated': None, 'cache_url': Non...</td>
+<td>[{'display_name': 'animals', 'id': '183cf169-0...</td>
+<td>[]</td>
+<td>[]</td>
+<td>[]</td>
+<td>NaN</td>
+<td>Animal Services</td>
+<td>Enforcement &amp; Mobile Response</td>
+</tr>
+</tbody>
+</table>
+
+<p>10 rows × 42 columns</p>
+</div>
+</div>
+</div>
+<p>We can download the data we want using the <code>id</code>.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>did <span class="op">=</span> <span class="st">'21c83b32-d5a8-4106-a54f-010dbe49f6f2'</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>downloaded_data <span class="op">=</span> tod.download_dataset(did)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>downloaded_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  0%|          | 0/16 [00:00&lt;?, ?it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>100%|██████████| 16/16 [00:00&lt;00:00, 6969.45it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/Daily shelter overnight occupancy.csv already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/Daily shelter overnight occupancy.xml already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/Daily shelter overnight occupancy.json already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2022.csv already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2022.xml already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2022.json already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2021.csv already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2021.xml already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2021.json already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2023.csv already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2023.xml already exists. Skipping...
+File cache/21c83b32-d5a8-4106-a54f-010dbe49f6f2/daily-shelter-overnight-service-occupancy-capacity-2023.json already exists. Skipping...
+
+Downloaded 0 resources: []</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dfn <span class="op">=</span> <span class="st">"daily-shelter-overnight-service-occupancy-capacity-2021.csv"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>toronto_shelters_2021 <span class="op">=</span> tod.load(did, dfn, smart_return<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>toronto_shelters_2021</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">_id</th>
+<th data-quarto-table-cell-role="th">OCCUPANCY_DATE</th>
+<th data-quarto-table-cell-role="th">ORGANIZATION_ID</th>
+<th data-quarto-table-cell-role="th">ORGANIZATION_NAME</th>
+<th data-quarto-table-cell-role="th">SHELTER_ID</th>
+<th data-quarto-table-cell-role="th">SHELTER_GROUP</th>
+<th data-quarto-table-cell-role="th">LOCATION_ID</th>
+<th data-quarto-table-cell-role="th">LOCATION_NAME</th>
+<th data-quarto-table-cell-role="th">LOCATION_ADDRESS</th>
+<th data-quarto-table-cell-role="th">LOCATION_POSTAL_CODE</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">OCCUPIED_BEDS</th>
+<th data-quarto-table-cell-role="th">UNOCCUPIED_BEDS</th>
+<th data-quarto-table-cell-role="th">UNAVAILABLE_BEDS</th>
+<th data-quarto-table-cell-role="th">CAPACITY_ACTUAL_ROOM</th>
+<th data-quarto-table-cell-role="th">CAPACITY_FUNDING_ROOM</th>
+<th data-quarto-table-cell-role="th">OCCUPIED_ROOMS</th>
+<th data-quarto-table-cell-role="th">UNOCCUPIED_ROOMS</th>
+<th data-quarto-table-cell-role="th">UNAVAILABLE_ROOMS</th>
+<th data-quarto-table-cell-role="th">OCCUPANCY_RATE_BEDS</th>
+<th data-quarto-table-cell-role="th">OCCUPANCY_RATE_ROOMS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>21-01-01</td>
+<td>24</td>
+<td>COSTI Immigrant Services</td>
+<td>40</td>
+<td>COSTI Reception Centre</td>
+<td>1103.0</td>
+<td>COSTI/City North York West Hotel Program</td>
+<td>1677 Wilson Ave</td>
+<td>M3L 1A5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>29.0</td>
+<td>58.0</td>
+<td>26.0</td>
+<td>3.0</td>
+<td>29.0</td>
+<td>NaN</td>
+<td>89.66</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>21-01-01</td>
+<td>24</td>
+<td>COSTI Immigrant Services</td>
+<td>40</td>
+<td>COSTI Reception Centre</td>
+<td>1103.0</td>
+<td>COSTI/City North York West Hotel Program</td>
+<td>1677 Wilson Ave</td>
+<td>M3L 1A5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>100.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>21-01-01</td>
+<td>24</td>
+<td>COSTI Immigrant Services</td>
+<td>40</td>
+<td>COSTI Reception Centre</td>
+<td>1103.0</td>
+<td>COSTI/City North York West Hotel Program</td>
+<td>1677 Wilson Ave</td>
+<td>M3L 1A5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>28.0</td>
+<td>0.0</td>
+<td>23.0</td>
+<td>5.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>82.14</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>21-01-01</td>
+<td>24</td>
+<td>COSTI Immigrant Services</td>
+<td>40</td>
+<td>COSTI Reception Centre</td>
+<td>1103.0</td>
+<td>COSTI/City North York West Hotel Program</td>
+<td>1677 Wilson Ave</td>
+<td>M3L 1A5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>17.0</td>
+<td>0.0</td>
+<td>17.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>100.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>21-01-01</td>
+<td>24</td>
+<td>COSTI Immigrant Services</td>
+<td>40</td>
+<td>COSTI Reception Centre</td>
+<td>1103.0</td>
+<td>COSTI/City North York West Hotel Program</td>
+<td>1677 Wilson Ave</td>
+<td>M3L 1A5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>14.0</td>
+<td>0.0</td>
+<td>13.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>92.86</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50939</td>
+<td>50940</td>
+<td>21-12-31</td>
+<td>17</td>
+<td>YWCA Toronto</td>
+<td>78</td>
+<td>YWCA-348 Davenport</td>
+<td>1129.0</td>
+<td>YWCA Davenport Shelter</td>
+<td>348 Davenport Road</td>
+<td>M5R 1K6</td>
+<td>...</td>
+<td>6.0</td>
+<td>14.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>30.00</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50940</td>
+<td>50941</td>
+<td>21-12-31</td>
+<td>31</td>
+<td>Youth Without Shelter</td>
+<td>52</td>
+<td>Youth Without Shelter</td>
+<td>1064.0</td>
+<td>Youth Without Shelter</td>
+<td>6 Warrendale Ct</td>
+<td>M9V 1P9</td>
+<td>...</td>
+<td>23.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100.00</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50941</td>
+<td>50942</td>
+<td>21-12-31</td>
+<td>31</td>
+<td>Youth Without Shelter</td>
+<td>52</td>
+<td>Youth Without Shelter</td>
+<td>1064.0</td>
+<td>Youth Without Shelter</td>
+<td>6 Warrendale Ct</td>
+<td>M9V 1P9</td>
+<td>...</td>
+<td>13.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>92.86</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50942</td>
+<td>50943</td>
+<td>21-12-31</td>
+<td>38</td>
+<td>YouthLink</td>
+<td>81</td>
+<td>YouthLink Shelter</td>
+<td>1147.0</td>
+<td>YouthLink</td>
+<td>747 Warden Ave</td>
+<td>M1L 4A1</td>
+<td>...</td>
+<td>10.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100.00</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50943</td>
+<td>50944</td>
+<td>21-12-31</td>
+<td>38</td>
+<td>YouthLink</td>
+<td>81</td>
+<td>YouthLink Shelter</td>
+<td>1147.0</td>
+<td>YouthLink</td>
+<td>747 Warden Ave</td>
+<td>M1L 4A1</td>
+<td>...</td>
+<td>29.0</td>
+<td>0.0</td>
+<td>2.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>100.00</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>50944 rows × 32 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>toronto_shelters_clean <span class="op">=</span> clean_names(toronto_shelters_2021)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>toronto_shelters_clean.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>Index(['_id', 'occupancy_date', 'organization_id', 'organization_name',
+       'shelter_id', 'shelter_group', 'location_id', 'location_name',
+       'location_address', 'location_postal_code', 'location_city',
+       'location_province', 'program_id', 'program_name', 'sector',
+       'program_model', 'overnight_service_type', 'program_area',
+       'service_user_count', 'capacity_type', 'capacity_actual_bed',
+       'capacity_funding_bed', 'occupied_beds', 'unoccupied_beds',
+       'unavailable_beds', 'capacity_actual_room', 'capacity_funding_room',
+       'occupied_rooms', 'unoccupied_rooms', 'unavailable_rooms',
+       'occupancy_rate_beds', 'occupancy_rate_rooms'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>toronto_shelters_clean <span class="op">=</span> toronto_shelters_clean[</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'occupancy_date'</span>, <span class="st">'occupied_beds'</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>toronto_shelters_clean.to_csv(<span class="st">'data/toronto_shelters_clean.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="explore-1" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="explore-1"><span class="header-section-number">2.4.3</span> Explore</h3>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>toronto_shelters_clean <span class="op">=</span> pd.read_csv(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/toronto_shelters_clean.csv"</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>toronto_shelters_clean[<span class="st">'occupancy_date'</span>] <span class="op">=</span> pd.to_datetime(</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    toronto_shelters_clean[<span class="st">'occupancy_date'</span>],</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">'%y-%m-</span><span class="sc">%d</span><span class="st">'</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>toronto_shelters_clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">occupancy_date</th>
+<th data-quarto-table-cell-role="th">occupied_beds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2021-01-01</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2021-01-01</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2021-01-01</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2021-01-01</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2021-01-01</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50939</td>
+<td>2021-12-31</td>
+<td>6.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50940</td>
+<td>2021-12-31</td>
+<td>23.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50941</td>
+<td>2021-12-31</td>
+<td>13.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50942</td>
+<td>2021-12-31</td>
+<td>10.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">50943</td>
+<td>2021-12-31</td>
+<td>29.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>50944 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<p>Monthly occupancy. Make this code look a little friendlier.</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>monthly_occupancy <span class="op">=</span> (</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    toronto_shelters_clean</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    .assign(occupancy_month<span class="op">=</span>toronto_shelters_clean[<span class="st">'occupancy_date'</span>].dt.strftime(<span class="st">'%B'</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">'occupancy_date'</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    .dropna(subset<span class="op">=</span>[<span class="st">'occupied_beds'</span>])</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">'occupancy_month'</span>)[<span class="st">'occupied_beds'</span>]</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="st">'occupancy_month'</span>: <span class="st">'Month'</span>, <span class="st">'occupied_beds'</span>: <span class="st">'Average daily number of occupied beds'</span>})</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(monthly_occupancy.to_markdown(index<span class="op">=</span><span class="va">False</span>, floatfmt<span class="op">=</span><span class="st">'.1f'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>| Month     |   Average daily number of occupied beds |
+|:----------|----------------------------------------:|
+| April     |                                    26.3 |
+| August    |                                    30.8 |
+| December  |                                    33.5 |
+| February  |                                    27.7 |
+| January   |                                    28.6 |
+| July      |                                    29.7 |
+| June      |                                    28.9 |
+| March     |                                    27.2 |
+| May       |                                    27.4 |
+| November  |                                    33.3 |
+| October   |                                    32.3 |
+| September |                                    31.7 |</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Toronto has a large unhoused population. Freezing winters mean it is critical there are enough places in shelters. We are interested to understand how usage of shelters changes in colder months, compared with warmer months. We use data provided by the City of Toronto about Toronto shelter bed occupancy. Specifically, at 4 a.m. each night a count is made of the occupied beds. We are interested in averaging this over the month. We cleaned, tidied, and analyzed the dataset using Python and libraries including pandas, numpy, matplotlib, and seaborn. We then made a table of the average number of occupied beds each night for each month. We found that the daily average number of occupied beds was higher in December 2021 than July 2021, with 34 occupied beds in December, compared with 30 in July. More generally, there was a steady increase in the daily average number of occupied beds between July and December, with a slight overall increase each month. The dataset is on the basis of shelters, and so our results may be skewed by changes that are specific to especially large or small shelters. It may be that specific shelters are particularly attractive in colder months. Additionally, we were concerned with counts of the number of occupied beds, but if the supply of beds changes over the season, then an additional statistic of interest would be the proportion occupied.</p>
+</blockquote>
+</section>
+</section>
+<section id="neonatal-mortality" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="neonatal-mortality"><span class="header-section-number">2.5</span> Neonatal Mortality</h2>
+<blockquote class="blockquote">
+<p>Neonatal mortality refers to a death that occurs within the first month of life. The neonatal mortality rate (NMR) is the number of neonatal deaths per 1,000 live births (UN IGME 2021). The Third Sustainable Development Goal (SDG) calls for a reduction in NMR to 12. In this example we will create a graph of the estimated NMR for the past 50 years for: Argentina, Australia, Canada, and Kenya.</p>
+</blockquote>
+<section id="simulate-2" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="simulate-2"><span class="header-section-number">2.5.1</span> Simulate</h3>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>number_of_years <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>simulated_nmr_data <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'country'</span>: np.repeat([<span class="st">'Argentina'</span>, <span class="st">'Australia'</span>, <span class="st">'Canada'</span>, <span class="st">'Kenya'</span>], number_of_years),</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'year'</span>: np.tile(np.arange(<span class="dv">1971</span>, <span class="dv">2021</span>), <span class="dv">4</span>),</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'nmr'</span>: np.random.uniform(<span class="dv">0</span>, <span class="dv">100</span>, number_of_years <span class="op">*</span> <span class="dv">4</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(simulated_nmr_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     country  year        nmr
+0  Argentina  1971  60.124444
+1  Argentina  1972   9.979622
+2  Argentina  1973  38.392210
+3  Argentina  1974  84.556192
+4  Argentina  1975   4.346687</code></pre>
+</div>
+</div>
+<section id="tests" class="level4" data-number="2.5.1.1">
+<h4 data-number="2.5.1.1" class="anchored" data-anchor-id="tests"><span class="header-section-number">2.5.1.1</span> Tests</h4>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">set</span>(simulated_nmr_data[<span class="st">'country'</span>]) <span class="op">==</span> {<span class="st">'Argentina'</span>, <span class="st">'Australia'</span>, <span class="st">'Canada'</span>, <span class="st">'Kenya'</span>})</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(simulated_nmr_data[<span class="st">'country'</span>].unique()) <span class="op">==</span> <span class="dv">4</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(simulated_nmr_data[<span class="st">'year'</span>].<span class="bu">min</span>() <span class="op">==</span> <span class="dv">1971</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(simulated_nmr_data[<span class="st">'year'</span>].<span class="bu">max</span>() <span class="op">==</span> <span class="dv">2020</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(simulated_nmr_data[<span class="st">'nmr'</span>].<span class="bu">min</span>() <span class="op">&gt;=</span> <span class="dv">0</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(simulated_nmr_data[<span class="st">'nmr'</span>].<span class="bu">max</span>() <span class="op">&lt;=</span> <span class="dv">1000</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.issubdtype(simulated_nmr_data[<span class="st">'nmr'</span>].dtype, np.number))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True
+True
+True
+True
+True
+True
+True</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="acquire-2" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="acquire-2"><span class="header-section-number">2.5.2</span> Acquire</h3>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>igme_url <span class="op">=</span> <span class="st">"https://childmortality.org/wp-content/uploads/2021/09/UNIGME-2021.csv"</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"User-Agent"</span>: <span class="st">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(igme_url, headers<span class="op">=</span>headers)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>response.raise_for_status() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>igme_csv <span class="op">=</span> response.content.decode(<span class="st">'utf-8'</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>raw_igme_data <span class="op">=</span> pd.read_csv(StringIO(igme_csv))</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>raw_igme_data.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_4125/460670154.py:3: DtypeWarning: Columns (6,9,10,20) have mixed types. Specify dtype option on import or set low_memory=False.
+  raw_igme_data = pd.read_csv(StringIO(igme_csv))</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Geographic area</th>
+<th data-quarto-table-cell-role="th">Indicator</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Wealth Quintile</th>
+<th data-quarto-table-cell-role="th">Series Name</th>
+<th data-quarto-table-cell-role="th">Series Year</th>
+<th data-quarto-table-cell-role="th">Regional group</th>
+<th data-quarto-table-cell-role="th">TIME_PERIOD</th>
+<th data-quarto-table-cell-role="th">OBS_VALUE</th>
+<th data-quarto-table-cell-role="th">COUNTRY_NOTES</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Age Group of Women</th>
+<th data-quarto-table-cell-role="th">Time Since First Birth</th>
+<th data-quarto-table-cell-role="th">DEFINITION</th>
+<th data-quarto-table-cell-role="th">INTERVAL</th>
+<th data-quarto-table-cell-role="th">Series Method</th>
+<th data-quarto-table-cell-role="th">LOWER_BOUND</th>
+<th data-quarto-table-cell-role="th">UPPER_BOUND</th>
+<th data-quarto-table-cell-role="th">STATUS</th>
+<th data-quarto-table-cell-role="th">YEAR_TO_ACHIEVE</th>
+<th data-quarto-table-cell-role="th">Model Used</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">63056</td>
+<td>Barbados</td>
+<td>Infant deaths</td>
+<td>Male</td>
+<td>Total</td>
+<td>UN IGME estimate</td>
+<td>2021</td>
+<td>NaN</td>
+<td>1969-06</td>
+<td>1.280000e+02</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>1.230000e+02</td>
+<td>1.340000e+02</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>BSR</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">317477</td>
+<td>Niger</td>
+<td>Infant mortality rate</td>
+<td>Female</td>
+<td>Total</td>
+<td>UN IGME estimate</td>
+<td>2021</td>
+<td>NaN</td>
+<td>1977-06</td>
+<td>1.263043e+02</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>1.168229e+02</td>
+<td>1.366741e+02</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>BSR</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">217529</td>
+<td>Italy</td>
+<td>Deaths age 15 to 24</td>
+<td>Total</td>
+<td>Total</td>
+<td>UN IGME estimate</td>
+<td>2021</td>
+<td>NaN</td>
+<td>2004-06</td>
+<td>2.781000e+03</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>2.725000e+03</td>
+<td>2.837000e+03</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">128551</td>
+<td>Algeria</td>
+<td>Under-five deaths</td>
+<td>Total</td>
+<td>Middle</td>
+<td>UN IGME estimate</td>
+<td>2020</td>
+<td>NaN</td>
+<td>2008-06</td>
+<td>4.442000e+03</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>4.058000e+03</td>
+<td>4.816000e+03</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">451310</td>
+<td>Turkey</td>
+<td>Under-five mortality rate</td>
+<td>Total</td>
+<td>Total</td>
+<td>Demographic and Health Survey 2013 (Direct)</td>
+<td>2013</td>
+<td>NaN</td>
+<td>2010-06</td>
+<td>1.540000e+01</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>5.0</td>
+<td>Survey/Census with Full Birth Histories</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">185537</td>
+<td>Honduras</td>
+<td>Infant mortality rate</td>
+<td>Male</td>
+<td>Total</td>
+<td>UN IGME estimate</td>
+<td>2021</td>
+<td>NaN</td>
+<td>2005-06</td>
+<td>2.702694e+01</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>2.444488e+01</td>
+<td>2.978954e+01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>BSR</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">406572</td>
+<td>South Sudan</td>
+<td>Mortality rate age 10-14</td>
+<td>Total</td>
+<td>Total</td>
+<td>UN IGME estimate</td>
+<td>2021</td>
+<td>NaN</td>
+<td>2020-06</td>
+<td>8.300980e+00</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>6.427805e+00</td>
+<td>1.068517e+01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">510681</td>
+<td>Saint Vincent and the Grenadines</td>
+<td>Mortality rate age 15-24</td>
+<td>Total</td>
+<td>Total</td>
+<td>UN IGME estimate</td>
+<td>2021</td>
+<td>NaN</td>
+<td>1997-06</td>
+<td>1.018420e+01</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>9.098660e+00</td>
+<td>1.142487e+01</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>B3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">474414</td>
+<td>Sub-Saharan Africa</td>
+<td>Infant deaths</td>
+<td>Total</td>
+<td>Total</td>
+<td>UN IGME estimate</td>
+<td>2021</td>
+<td>UNICEF</td>
+<td>1998-06</td>
+<td>2.487715e+06</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>2.448277e+06</td>
+<td>2.536839e+06</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">410458</td>
+<td>Suriname</td>
+<td>Infant mortality rate</td>
+<td>Male</td>
+<td>Total</td>
+<td>Multiple Indicator Cluster Survey 2018 (Direct)</td>
+<td>2018</td>
+<td>NaN</td>
+<td>2015-06</td>
+<td>2.053527e+01</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>5.0</td>
+<td>Survey/Census with Full Birth Histories</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>10 rows × 29 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>raw_igme_data.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>Index(['Geographic area', 'Indicator', 'Sex', 'Wealth Quintile', 'Series Name',
+       'Series Year', 'Regional group', 'TIME_PERIOD', 'OBS_VALUE',
+       'COUNTRY_NOTES', 'CONNECTION', 'DEATH_CATEGORY', 'CATEGORY',
+       'Observation Status', 'Unit of measure', 'Series Category',
+       'Series Type', 'STD_ERR', 'REF_DATE', 'Age Group of Women',
+       'Time Since First Birth', 'DEFINITION', 'INTERVAL', 'Series Method',
+       'LOWER_BOUND', 'UPPER_BOUND', 'STATUS', 'YEAR_TO_ACHIEVE',
+       'Model Used'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>We would like to clean up the names and only keep the rows and columns that we are interested in. Based on our plan, we are interested in rows where “Sex” is “Total”, “Series Name” is “UN IGME estimate”, “Geographic area” is one of “Argentina”, “Australia”, “Canada”, and “Kenya”, and the “Indicator” is “Neonatal mortality rate”. After this we are interested in just a few columns: “geographic_area”, “time_period”, and “obs_value”.</p>
+</blockquote>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cleaned_igme_data <span class="op">=</span> (</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    clean_names(raw_igme_data)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">'sex == "Total" and series_name == "UN IGME estimate" and '</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">'geographic_area in ["Argentina", "Australia", "Canada", "Kenya"] and '</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">'indicator == "Neonatal mortality rate"'</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    [[<span class="st">'geographic_area'</span>, <span class="st">'time_period'</span>, <span class="st">'obs_value'</span>]]</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>cleaned_igme_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">geographic_area</th>
+<th data-quarto-table-cell-role="th">time_period</th>
+<th data-quarto-table-cell-role="th">obs_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10531</td>
+<td>Argentina</td>
+<td>1970-06</td>
+<td>24.855740</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10532</td>
+<td>Argentina</td>
+<td>1971-06</td>
+<td>24.741421</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10533</td>
+<td>Argentina</td>
+<td>1972-06</td>
+<td>24.633248</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10534</td>
+<td>Argentina</td>
+<td>1973-06</td>
+<td>24.576908</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10535</td>
+<td>Argentina</td>
+<td>1974-06</td>
+<td>24.459251</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>We need to fix two other aspects: the class of “time_period” is string when we need it to be a year, and the name of “obs_value” should be “nmr” to be more informative.</p>
+</blockquote>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cleaned_igme_data <span class="op">=</span> (cleaned_igme_data</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    .assign(time_period<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">'time_period'</span>].<span class="bu">str</span>.replace(<span class="st">'-06'</span>, <span class="st">''</span>).astype(<span class="bu">int</span>))</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">'time_period &gt;= 1971'</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="st">'obs_value'</span>: <span class="st">'nmr'</span>, <span class="st">'time_period'</span>: <span class="st">'year'</span>, <span class="st">'geographic_area'</span>: <span class="st">'country'</span>})</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_igme_data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         country  year        nmr
+10532  Argentina  1971  24.741421
+10533  Argentina  1972  24.633248
+10534  Argentina  1973  24.576908
+10535  Argentina  1974  24.459251
+10536  Argentina  1975  24.070211</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Finally, we can check that our dataset passes the tests that we developed based on the simulated dataset.</p>
+</blockquote>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">set</span>(cleaned_igme_data[<span class="st">'country'</span>]) <span class="op">==</span> {<span class="st">'Argentina'</span>, <span class="st">'Australia'</span>, <span class="st">'Canada'</span>, <span class="st">'Kenya'</span>})</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(cleaned_igme_data[<span class="st">'country'</span>].unique()) <span class="op">==</span> <span class="dv">4</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_igme_data[<span class="st">'year'</span>].<span class="bu">min</span>() <span class="op">==</span> <span class="dv">1971</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_igme_data[<span class="st">'year'</span>].<span class="bu">max</span>() <span class="op">==</span> <span class="dv">2020</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_igme_data[<span class="st">'nmr'</span>].<span class="bu">min</span>() <span class="op">&gt;=</span> <span class="dv">0</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_igme_data[<span class="st">'nmr'</span>].<span class="bu">max</span>() <span class="op">&lt;=</span> <span class="dv">1000</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.issubdtype(cleaned_igme_data[<span class="st">'nmr'</span>].dtype, np.number))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True
+True
+True
+True
+True
+True
+True</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>All that remains is to save the nicely cleaned dataset.</p>
+</blockquote>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cleaned_igme_data.to_csv(<span class="st">"data/cleaned_igme_data.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="explore-2" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="explore-2"><span class="header-section-number">2.5.3</span> Explore</h3>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>cleaned_igme_data, </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'year'</span>, </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'nmr'</span>, </span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'country'</span>, </span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">'Set1'</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Neonatal Mortality Rates (NMR)</span><span class="ch">\n</span><span class="st">Argentina, Australia, Canada, and Kenya (1971-2020)</span><span class="ch">\n</span><span class="st">"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">""</span>)</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Neonatal Mortality Rate (NMR)</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>plt.legend(</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">""</span>, </span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">'lower center'</span>, </span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>    bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, </span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span><span class="fl">0.3</span>), </span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>    ncol<span class="op">=</span><span class="dv">4</span>, </span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>    frameon<span class="op">=</span><span class="va">False</span></span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'figures/Neonatal-Mortality-Rate-Argentina-Australia-Canada-and-Kenya-71-20.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_4125/1016042825.py:25: UserWarning: The figure layout has changed to tight
+  plt.tight_layout()</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="firehose_files/figure-html/cell-33-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./telling-stories.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Telling Stories with Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

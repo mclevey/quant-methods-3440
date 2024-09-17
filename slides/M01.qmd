@@ -1,0 +1,64 @@
+---
+title: "[SOCI 3440]{.small-text}<br>Quantitative Research Methods"
+subtitle: "[[Module 1]{.kn-pink} [Introduction]{.kn-blue}]{.large-text}"
+author:
+  - name: "<br>[John McLevey]{.large-text}"
+    affiliations:
+      - name: "[Department of Sociology<br>Memorial University]{.large-text}"
+output-dir: "../docs/"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    width: 1600
+    height: 900
+    embed-resources: true
+    execute:
+      echo: true
+      warning: false
+      cache: true
+      freeze: true
+    slide-number: false
+    chalkboard: false
+    preview-links: auto
+    smaller: true
+    fig-align: left
+    fig-format: svg
+    lightbox: true
+    scrollable: true
+    code-overflow: scroll
+    code-fold: false
+    code-line-numbers: true
+    code-copy: hover
+    reference-location: document
+    tbl-cap-location: margin
+    # footer: "[CC BY-SA 4.0]{.nord-footer}"
+    email-obfuscation: javascript
+highlight-style: "nord"
+bibliography: ../references.bib
+---
+
+##
+
+Coming soon... 
+
+## 
+
+:::: {.columns}
+::: {.column width="45%"}
+![Placeholder image.](media/chatgpt_dependency_hell.png){width=100% #fig-chatgpt_dependency_hell}
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+### This is just a placeholder.
+
+I'll be pushing actual content soon. Also, how can I align the title and paragraph text here? Super annoying.
+:::
+::::
+
+
+# References
+
+##
