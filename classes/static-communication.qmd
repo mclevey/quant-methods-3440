@@ -1,0 +1,164 @@
+# Static Communication
+
+- This would be easy to do. But do I want to translate this or just use my own chapters from DCSS with some updates? Covers just super basic stuff. 
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+import geopandas as gpd
+import folium
+
+from qrm3440 import set_style
+set_style()
+```
+
+```{python}
+# load the datasaurus_dozen data from the course package
+from qrm3440.paths import datasaurus_dozen
+
+datasaurus = pd.read_csv(datasaurus_dozen, sep='\t')
+datasaurus.head()
+```
+
+```{python}
+summary_stats = datasaurus[datasaurus['dataset'].isin(['dino', 'star', 'away', 'bullseye'])].groupby('dataset').agg({
+    'x': ['mean', 'std'],
+    'y': ['mean', 'std']
+}).round(1)
+
+summary_stats.columns = ['x mean', 'x sd', 'y mean', 'y sd']
+summary_stats.reset_index()
+```
+
+```{python}
+fig, axes = plt.subplots(2, 2, figsize=(12, 12))
+axes = axes.flatten()
+
+for i, dataset in enumerate(['dino', 'star', 'away', 'bullseye']):
+    data = datasaurus[datasaurus['dataset'] == dataset]
+    axes[i].scatter(data['x'], data['y'])
+    axes[i].set_title(dataset)
+    axes[i].set_xlabel('x')
+    axes[i].set_ylabel('y')
+
+plt.tight_layout()
+plt.savefig('figures/dino-star-away-bullseye.png', dpi=300)
+```
+
+```{python}
+from statsmodels.datasets import get_rdataset
+
+anscombe = get_rdataset("anscombe").data
+anscombe.head()
+```
+
+```{python}
+tidy_anscombe = pd.melt(anscombe.reset_index(), id_vars=['index'], var_name='set', value_name='value')
+tidy_anscombe[['variable', 'set']] = tidy_anscombe['set'].str.extract('(.)(.)')
+tidy_anscombe = tidy_anscombe.pivot_table(index=['index', 'set'], columns='variable', values='value').reset_index()
+print(tidy_anscombe.head())
+```
+
+```{python}
+summary_stats = tidy_anscombe.groupby('set').agg({
+    'x': ['mean', 'std'],
+    'y': ['mean', 'std']
+}).round(1)
+
+summary_stats.columns = ['x mean', 'x sd', 'y mean', 'y sd']
+print(summary_stats)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 12))
+axes = axes.flatten()
+
+for i, dataset in enumerate(['1', '2', '3', '4']):
+    data = tidy_anscombe[tidy_anscombe['set'] == dataset]
+    axes[i].scatter(data['x'], data['y'])
+    axes[i].set_title(f'Dataset {dataset}')
+    axes[i].set_xlabel('x')
+    axes[i].set_ylabel('y')
+    
+    # Add regression line
+    x = data['x']
+    y = data['y']
+    axes[i].plot(x, np.poly1d(np.polyfit(x, y, 1))(x), color='r')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Bar Charts
+
+```{python}
+# NOTE: we'll simulate a similar dataset for illustration purposes; collect actual data ASAP
+
+import numpy as np
+
+np.random.seed(42)
+
+beps = pd.DataFrame({
+    'age': np.random.randint(18, 80, 1000),
+    'vote': np.random.choice(['Conservative', 'Labour', 'Liberal Democrat'], 1000),
+    'gender': np.random.choice(['Male', 'Female'], 1000),
+    'political_knowledge': np.random.randint(0, 4, 1000)
+})
+
+beps['age_group'] = pd.cut(beps['age'], bins=[0, 35, 50, 65, 80, 100], labels=['<35', '35-49', '50-64', '65-79', '80-99'])
+
+print(beps.head())
+```
+
+```{python}
+plt.figure(figsize=(10, 6))
+sns.countplot(x='age_group', data=beps)
+plt.title('Distribution of age-groups in the simulated British Election Panel Study')
+plt.xlabel('Age group')
+plt.ylabel('Number of observations')
+plt.show()
+```
+
+```{python}
+plt.figure(figsize=(12, 6))
+sns.countplot(x='age_group', hue='vote', data=beps)
+plt.title('Distribution of age-group and vote preference')
+plt.xlabel('Age group')
+plt.ylabel('Number of observations')
+plt.legend(title='Vote')
+plt.show()
+```
+
+## Facets
+
+```{python}
+g = sns.FacetGrid(beps, col="vote", col_wrap=2, height=4, aspect=1.5)
+g.map(sns.countplot, "age_group") # hue="gender"
+g.add_legend()
+g.set_axis_labels("Age-group of respondent", "Number of respondents")
+g.set_titles("{col_name}")
+plt.tight_layout()
+plt.show()
+```
+
+## Scatterplots
+
+```{python}
+import pandas_datareader as pdr
+
+# Download data
+countries = ['AUS', 'ETH', 'IND', 'USA']
+indicators = {
+    'NY.GDP.MKTP.KD.ZG': 'gdp_growth',
+    'FP.CPI.TOTL.ZG': 'inflation',
+    'SP.POP.TOTL': 'population',
+    'SL.UEM.TOTL.NE.ZS': 'unem_rate'
+}
+
+world_bank_data = pdr.wb.download(indicator=list(indicators.keys()), country=countries, start=1960, end=2021)
+world_bank_data = world_bank_data.reset_index()
+world_bank_data.columns = ['country', 'year'] + list(indicators.values())
+
+print(world_bank_data.head())
+```

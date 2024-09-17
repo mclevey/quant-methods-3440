@@ -1,0 +1,115 @@
+# Writing Research
+
+```{python}
+import numpy as np
+import pandas as pd
+
+np.random.seed(853)
+```
+
+#### Estimands
+
+```{python}
+num_draws = np.concatenate([
+    np.repeat(10, 10),
+    np.repeat(100, 100),
+    np.repeat(1000, 1000),
+    np.repeat(10000, 10000)
+])
+
+draw = np.random.normal(loc=0, scale=1, size=len(num_draws))
+
+df = pd.DataFrame({
+    'num_draws': num_draws,
+    'draw': draw
+})
+
+result = df.groupby('num_draws').agg({
+    'draw': [
+        ('estimator_one', lambda x: x.sum() / len(x)),
+        ('estimator_two', lambda x: np.sort(x)[len(x)//2])
+    ]
+}).reset_index()
+
+result.columns = ['Number of draws', 'Estimator one', 'Estimator two']
+result = result.round(2)
+
+mdtable = result.to_markdown(index=False)
+print(mdtable)
+```
+
+## Directed Acyclic Graphs (DAGs)
+
+```{dot}
+//| label: fig-dot-firstdag-quarto
+//| fig-cap: "We expect a causal relationship between x and y, where x influences y"
+//| fig-width: 4
+digraph D {
+  node [shape=plaintext, fontname = "helvetica"];
+  
+  {rank=same x y};
+  
+  x -> y;
+}
+```
+
+```{dot}
+//| label: fig-education-income-happiness
+//| fig-cap: "Education is a confounder that affects the relationship between income and happiness"
+//| fig-width: 4
+digraph D {
+  
+  node [shape=plaintext, fontname = "helvetica"];
+  
+  a [label = "Income"];
+  b [label = "Happiness"];
+  c [label = "Education"];
+  
+  { rank=same a b};
+  
+  a->b;
+  c->{a, b};
+}
+```
+
+
+```{dot}
+//| label: fig-children-income-happiness
+//| fig-cap: "blah blah blah"
+//| fig-width: 4
+//| 
+digraph D {
+
+  node [shape=plaintext, fontname = "helvetica"];
+  
+  a [label = "Income"];
+  b [label = "Happiness"];
+  c [label = "Children"];
+  
+  { rank=same a b};
+  
+  a->{b, c};
+  c->b;
+}
+```
+
+```{dot}
+//| label: fig-exercise-income-happiness
+//| fig-cap: "blah blah blah"
+//| fig-width: 4
+//| 
+digraph D {
+
+  node [shape=plaintext, fontname = "helvetica"];
+  
+  a [label = "Income"];
+  b [label = "Happiness"];
+  c [label = "Exercise"];
+  
+  { rank=same a b};
+  
+  a->{b c};
+  b->c;
+}
+```
+

@@ -1,0 +1,373 @@
+# Drinking from the Firehose
+
+> This notebook translates the R code in [Chapter 2: Drinking from the Firehose](https://tellingstorieswithdata.com/02-drinking_from_a_fire_hose.html) to Python.
+
+## Examples in Python
+
+## Setup
+
+```{python}
+import pandas as pd
+from io import StringIO
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from janitor import clean_names, remove_empty
+from datetime import datetime, timedelta
+from TorontoOpenData import TorontoOpenData
+import requests
+
+from qrm3440 import set_style
+set_style()
+```
+
+## Australian Elections
+
+### Simulate
+
+```{python}
+np.random.seed(853)
+
+simulated_election_data = {
+    "Division": range(1, 152),
+    "Party": np.random.choice(
+        ["Liberal", "Labour", "National", "Green", "Other"],
+        size = 151,
+        replace = True
+    )
+}
+
+simulated_election_data = pd.DataFrame(simulated_election_data)
+simulated_election_data.sample(10)
+```
+
+### Acquire
+
+```{python}
+data_url = "https://results.aec.gov.au/27966/website/Downloads/HouseMembersElectedDownload-27966.csv"
+
+raw_elections_data = pd.read_csv(data_url, skiprows=1)
+raw_elections_data.to_csv("data/australian_voting.csv", index=False)
+
+raw_elections_data.info()
+```
+
+```{python}
+raw_elections_data.sample(10)
+```
+
+We can do a bit of cleaning using `janitor`. 
+
+```{python}
+cleaned_elections_data = clean_names(raw_elections_data)
+print(cleaned_elections_data.head(10))
+```
+
+```{python}
+cleaned_elections_data = cleaned_elections_data[["divisionnm", "partynm"]]
+
+cleaned_elections_data.sample(10)
+```
+
+```{python}
+print(cleaned_elections_data.columns)
+
+cleaned_elections_data = cleaned_elections_data.rename(columns={
+    "divisionnm": "division",
+    "partynm": "elected_party"
+})
+
+cleaned_elections_data.sample(10)
+```
+
+```{python}
+cleaned_elections_data["elected_party"].unique()
+```
+
+```{python}
+party_map = {
+    "Australian Labor Party": "Labor",
+    "Liberal National Party of Queensland": "Liberal",
+    "Liberal": "Liberal",
+    "The Nationals": "Nationals",
+    "The Greens": "Greens",
+    "Independent": "Other",
+    "Katter's Australian Party (KAP)": "Other",
+    "Centre Alliance": "Other"
+}
+
+cleaned_elections_data["elected_party"] = cleaned_elections_data["elected_party"].map(party_map)
+
+cleaned_elections_data.head()
+```
+
+```{python}
+cleaned_elections_data.to_csv("data/cleaned_elections_data.csv", index=False)
+```
+
+### Explore
+
+```{python}
+cleaned_elections_data = pd.read_csv("data/cleaned_elections_data.csv")
+```
+
+```{python}
+cleaned_elections_data["elected_party"].value_counts()
+```
+
+Let's create our first plot!
+
+```{python}
+plt.figure(figsize=(10, 6))
+
+sns.countplot(
+    x="elected_party", 
+    data=cleaned_elections_data
+)
+
+plt.title("No. of seats won by political party\nin the 2022 Australian Federal Election\n", loc='left')
+
+plt.xlabel("")
+plt.ylabel("Number of seats\n")
+
+plt.tight_layout()
+
+plt.savefig(
+    'figures/australian_election_2022.png', dpi=300
+)
+```
+
+### Share
+
+> Australia is a parliamentary democracy with 151 seats in the House of Representatives, which is the house from which government is formed. There are two major parties---"Liberal" and "Labor"---two minor parties---"Nationals" and "Greens"---and many smaller parties. The 2022 Federal Election occurred on 21 May, and around 15 million votes were cast. We were interested in the number of seats that were won by each party.
+> We downloaded the results, on a seat-specific basis, from the Australian Electoral Commission website. We cleaned and tidied the dataset using Python and libraries including pandas, numpy, matplotlib, and seaborn. We then created a graph of the number of seats that each political party won.
+> We found that the Labor Party won 77 seats, followed by the Liberal Party with 48 seats. The minor parties won the following number of seats: the Nationals won 10 seats and the Greens won 4 seats. Finally, there were 10 Independents elected as well as candidates from smaller parties.
+> The distribution of seats is skewed toward the two major parties which could reflect relatively stable preferences on the part of Australian voters, or possibly inertia due to the benefits of already being a major party such a national network or funding. A better understanding of the reasons for this distribution are of interest in future work. While the dataset consists of everyone who voted, it worth noting that in Australia some are systematically excluded from voting, and it is much more difficult for some to vote than others.
+
+## Toronto's unhoused population
+
+### Simulate
+
+```{python}
+np.random.seed(853)
+
+start_date = datetime(2021, 1, 1)
+dates = [start_date + timedelta(days=i) for i in range(365)]
+
+simulated_occupancy_data = pd.DataFrame({
+    'date': dates * 3,
+    'shelter': ['Shelter 1'] * 365 + ['Shelter 2'] * 365 + ['Shelter 3'] * 365,
+    'number_occupied': np.random.poisson(lam=30, size=365*3)
+})
+
+simulated_occupancy_data.sample(10)
+```
+
+### Acquire
+
+The data is available [here](https://open.toronto.ca/dataset/daily-shelter-overnight-service-occupancy-capacity/).
+
+```{python}
+tod = TorontoOpenData()
+
+search_results = tod.search_datasets('daily-shelter-overnight-service-occupancy-capacity-2021')
+search_results
+```
+
+We can download the data we want using the `id`.
+
+```{python}
+did = '21c83b32-d5a8-4106-a54f-010dbe49f6f2'
+downloaded_data = tod.download_dataset(did)
+
+downloaded_data
+```
+
+```{python}
+dfn = "daily-shelter-overnight-service-occupancy-capacity-2021.csv"
+toronto_shelters_2021 = tod.load(did, dfn, smart_return=True)
+toronto_shelters_2021
+```
+
+```{python}
+toronto_shelters_clean = clean_names(toronto_shelters_2021)
+toronto_shelters_clean.columns
+```
+
+```{python}
+toronto_shelters_clean = toronto_shelters_clean[
+    ['occupancy_date', 'occupied_beds']
+]
+```
+
+```{python}
+toronto_shelters_clean.to_csv('data/toronto_shelters_clean.csv', index=False)
+```
+
+### Explore
+
+```{python}
+toronto_shelters_clean = pd.read_csv(
+    "data/toronto_shelters_clean.csv"
+)
+
+toronto_shelters_clean['occupancy_date'] = pd.to_datetime(
+    toronto_shelters_clean['occupancy_date'],
+    format='%y-%m-%d'
+)
+
+toronto_shelters_clean
+```
+
+Monthly occupancy. Make this code look a little friendlier. 
+
+```{python}
+monthly_occupancy = (
+    toronto_shelters_clean
+    .assign(occupancy_month=toronto_shelters_clean['occupancy_date'].dt.strftime('%B'))
+    .sort_values('occupancy_date')
+    .dropna(subset=['occupied_beds'])
+    .groupby('occupancy_month')['occupied_beds']
+    .mean()
+    .reset_index()
+    .rename(columns={'occupancy_month': 'Month', 'occupied_beds': 'Average daily number of occupied beds'})
+)
+
+print(monthly_occupancy.to_markdown(index=False, floatfmt='.1f'))
+```
+
+> Toronto has a large unhoused population. Freezing winters mean it is critical there are enough places in shelters. We are interested to understand how usage of shelters changes in colder months, compared with warmer months.
+> We use data provided by the City of Toronto about Toronto shelter bed occupancy. Specifically, at 4 a.m. each night a count is made of the occupied beds. We are interested in averaging this over the month. We cleaned, tidied, and analyzed the dataset using Python and libraries including pandas, numpy, matplotlib, and seaborn. We then made a table of the average number of occupied beds each night for each month.
+> We found that the daily average number of occupied beds was higher in December 2021 than July 2021, with 34 occupied beds in December, compared with 30 in July. More generally, there was a steady increase in the daily average number of occupied beds between July and December, with a slight overall increase each month.
+> The dataset is on the basis of shelters, and so our results may be skewed by changes that are specific to especially large or small shelters. It may be that specific shelters are particularly attractive in colder months. Additionally, we were concerned with counts of the number of occupied beds, but if the supply of beds changes over the season, then an additional statistic of interest would be the proportion occupied.
+
+## Neonatal Mortality
+
+> Neonatal mortality refers to a death that occurs within the first month of life. The neonatal mortality rate (NMR) is the number of neonatal deaths per 1,000 live births (UN IGME 2021). The Third Sustainable Development Goal (SDG) calls for a reduction in NMR to 12. In this example we will create a graph of the estimated NMR for the past 50 years for: Argentina, Australia, Canada, and Kenya.
+
+### Simulate
+
+```{python}
+number_of_years = 50
+
+simulated_nmr_data = pd.DataFrame(
+    {
+        'country': np.repeat(['Argentina', 'Australia', 'Canada', 'Kenya'], number_of_years),
+        'year': np.tile(np.arange(1971, 2021), 4),
+        'nmr': np.random.uniform(0, 100, number_of_years * 4)
+    }
+)
+
+print(simulated_nmr_data.head())
+```
+
+#### Tests
+
+```{python}
+print(set(simulated_nmr_data['country']) == {'Argentina', 'Australia', 'Canada', 'Kenya'})
+print(len(simulated_nmr_data['country'].unique()) == 4)
+print(simulated_nmr_data['year'].min() == 1971)
+print(simulated_nmr_data['year'].max() == 2020)
+print(simulated_nmr_data['nmr'].min() >= 0)
+print(simulated_nmr_data['nmr'].max() <= 1000)
+print(np.issubdtype(simulated_nmr_data['nmr'].dtype, np.number))
+```
+
+### Acquire
+
+```{python}
+igme_url = "https://childmortality.org/wp-content/uploads/2021/09/UNIGME-2021.csv"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+}
+
+response = requests.get(igme_url, headers=headers)
+response.raise_for_status() 
+```
+
+```{python}
+igme_csv = response.content.decode('utf-8')
+
+raw_igme_data = pd.read_csv(StringIO(igme_csv))
+raw_igme_data.sample(10)
+```
+
+```{python}
+raw_igme_data.columns
+```
+
+> We would like to clean up the names and only keep the rows and columns that we are interested in. Based on our plan, we are interested in rows where "Sex" is "Total", "Series Name" is "UN IGME estimate", "Geographic area" is one of "Argentina", "Australia", "Canada", and "Kenya", and the "Indicator" is "Neonatal mortality rate". After this we are interested in just a few columns: "geographic_area", "time_period", and "obs_value".
+
+```{python}
+cleaned_igme_data = (
+    clean_names(raw_igme_data)
+    .query('sex == "Total" and series_name == "UN IGME estimate" and '
+           'geographic_area in ["Argentina", "Australia", "Canada", "Kenya"] and '
+           'indicator == "Neonatal mortality rate"')
+    [['geographic_area', 'time_period', 'obs_value']]
+)
+
+cleaned_igme_data.head()
+```
+
+> We need to fix two other aspects: the class of "time_period" is string when we need it to be a year, and the name of "obs_value" should be "nmr" to be more informative.
+
+```{python}
+cleaned_igme_data = (cleaned_igme_data
+    .assign(time_period=lambda x: x['time_period'].str.replace('-06', '').astype(int))
+    .query('time_period >= 1971')
+    .rename(columns={'obs_value': 'nmr', 'time_period': 'year', 'geographic_area': 'country'})
+)
+
+print(cleaned_igme_data.head())
+```
+
+> Finally, we can check that our dataset passes the tests that we developed based on the simulated dataset.
+
+```{python}
+print(set(cleaned_igme_data['country']) == {'Argentina', 'Australia', 'Canada', 'Kenya'})
+print(len(cleaned_igme_data['country'].unique()) == 4)
+print(cleaned_igme_data['year'].min() == 1971)
+print(cleaned_igme_data['year'].max() == 2020)
+print(cleaned_igme_data['nmr'].min() >= 0)
+print(cleaned_igme_data['nmr'].max() <= 1000)
+print(np.issubdtype(cleaned_igme_data['nmr'].dtype, np.number))
+```
+
+> All that remains is to save the nicely cleaned dataset.
+
+```{python}
+cleaned_igme_data.to_csv("data/cleaned_igme_data.csv", index=False)
+```
+
+### Explore
+
+```{python}
+plt.figure(figsize=(10, 6))
+
+sns.scatterplot(
+    data=cleaned_igme_data, 
+    x='year', 
+    y='nmr', 
+    hue='country', 
+    palette='Set1'
+)
+
+plt.title("Neonatal Mortality Rates (NMR)\nArgentina, Australia, Canada, and Kenya (1971-2020)\n", loc='left')
+
+plt.xlabel("")
+plt.ylabel("Neonatal Mortality Rate (NMR)\n")
+
+plt.legend(
+    title="", 
+    loc='lower center', 
+    bbox_to_anchor=(0.5, 
+    -0.3), 
+    ncol=4, 
+    frameon=False
+)
+
+plt.tight_layout()
+plt.savefig('figures/Neonatal-Mortality-Rate-Argentina-Australia-Canada-and-Kenya-71-20.png', dpi=300)
+```
+

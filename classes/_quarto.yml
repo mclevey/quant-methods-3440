@@ -1,0 +1,25 @@
+project:
+  type: book
+
+book:
+  title: "SOCI 3440"
+  author: "John McLevey"
+  date: "2024-09-17"
+  chapters:
+    - index.qmd
+    - telling-stories.qmd
+    - firehose.qmd
+    - writing-research.qmd
+    - static-communication.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

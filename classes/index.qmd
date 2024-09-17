@@ -1,0 +1,81 @@
+# Course Information {.unnumbered}
+
+## Description
+
+## Schedule
+
+<!-- 
+# Syllabus {.unnumbered}
+
+## Course Overview
+
+> [!info] Telling Stories with Data **in Python**
+>
+> This course is designed around Rowan Alexander's [-@alexander2023telling] book *Telling Stories with Data*. Rowan's book uses the language R, which is a great choice for quantitative researchers. However, we will use Python in this course, which is also a great choice for quantitative researchers.
+
+## Learning Objectives
+
+By the end of this course, 
+
+1. first
+2. second
+3. third
+
+To help you get there, each class has a more specific set of learning objectives. You can find them at the start of each of the class pages linked in the left-hand sidebar.
+
+### Atomic Habits and the Mundanity of Excellence
+
+> Excellence is mundane. Superlative performance is really a confluence of dozens of small skills or activities, each one learned or stumbled upon, which have been carefully drilled into habit and then are fitted together in a synthesized whole. There is nothing extraordinary or super-human in any one of those actions; only the fact that they are done consistently and correctly, and all together, produce excellence.
+> @chambliss1989mundanity
+
+The best way to get good at quantitative social science -- and data science more generally -- is to develop good **atomic habits** [@barrett2021data].
+
+## Schedule
+
+### Part 1: Foundations
+
+1. [Introduction](index.qmd) + [Telling Stories with Data](class-01.qmd)
+2. [Drinking from a Firehose](class-02.qmd)
+3. [Getting Started with Research Computing](class-03.qmd)
+
+### Part 2: Communication
+
+4. [Writing Research](class-04.qmd)
+5. [Static Communication](class-05.qmd)
+
+### Part 3: Acquiring Data
+
+6. [Farm Data](class-06.qmd)
+7. [Gather Data](class-07.qmd) 
+8. [Hunt Data](class-08.qmd)
+
+### Part 4: Cleaning, Preparing, Storing, and Sharing Data
+
+9. [Clean and Prepare](class-09.qmd)
+10. [Store and Share](class-10.qmd)
+
+### Part 5: Exploring and Modelling
+
+11. [Exploratory Data Analysis](class-11.qmd)
+12. [Linear Models (I)](class-12.qmd)
+13. [Linear Models (II)](class-13.qmd)
+14. [Generalized linear models (I)](class-14.qmd)
+15. [Generalized linear models (II)](class-15.qmd)
+
+### Part 6: Applications
+
+16. [Causality, Inference, and Prediction](class-16.qmd)
+17. [Causal Analysis with Observational Data](class-17.qmd)
+18. [Multilevel Regression (I)](class-18.qmd)
+19. [Multilevel Regression (II)](class-19.qmd)
+20. [Multilevel Regression (III) and Post-stratification](class-20.qmd)
+21. [flex (in development)](class-21.qmd)
+22. [flex (in development)](class-22.qmd)
+23. [flex (in development)](class-23.qmd)
+24. [flex (in development)](class-24.qmd)
+
+## Evaluation
+
+{{< include _evaluation.qmd >}}
+
+ -->
