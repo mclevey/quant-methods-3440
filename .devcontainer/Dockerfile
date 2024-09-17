@@ -7,6 +7,7 @@ RUN pacman -Syu --noconfirm && \
     curl \
     tree \
     unzip \
+    openssh \
     python-pip \
     base-devel
 

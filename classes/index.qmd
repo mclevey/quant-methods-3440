@@ -4,7 +4,7 @@
 
 ## Schedule
 
-<!-- 
+<!--
 # Syllabus {.unnumbered}
 
 ## Course Overview
@@ -15,7 +15,7 @@
 
 ## Learning Objectives
 
-By the end of this course, 
+By the end of this course,
 
 1. first
 2. second
@@ -46,7 +46,7 @@ The best way to get good at quantitative social science -- and data science more
 ### Part 3: Acquiring Data
 
 6. [Farm Data](class-06.qmd)
-7. [Gather Data](class-07.qmd) 
+7. [Gather Data](class-07.qmd)
 8. [Hunt Data](class-08.qmd)
 
 ### Part 4: Cleaning, Preparing, Storing, and Sharing Data

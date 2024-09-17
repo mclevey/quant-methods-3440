@@ -1,11 +1,15 @@
 {
-	"name": "graph-tool",
+	"name": "qrm3440",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": ".."
 	},
 	"postCreateCommand": "poetry install",
 	"remoteUser": "root",
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/root/.ssh,type=bind",
+		"source=${localWorkspaceFolder},target=/workspace,type=bind"
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
